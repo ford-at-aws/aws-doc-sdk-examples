@@ -5,7 +5,6 @@
 Unit tests for AWS Security Token Service (AWS STS) usage functions.
 """
 
-import json
 import unittest.mock
 import webbrowser
 import pytest

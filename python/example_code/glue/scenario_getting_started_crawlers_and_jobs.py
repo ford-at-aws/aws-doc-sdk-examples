@@ -19,12 +19,10 @@ Shows how to use the AWS SDK for Python (Boto3) with AWS Glue to:
 
 import argparse
 import io
-import json
 import logging
 from pprint import pprint
 import sys
 import time
-import uuid
 import boto3
 from boto3.exceptions import S3UploadFailedError
 from botocore.exceptions import ClientError

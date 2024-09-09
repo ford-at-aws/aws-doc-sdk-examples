@@ -21,7 +21,11 @@ maintained as functional code.
 # This version makes a POST request and passes request parameters
 # in the body (payload) of the request. Auth information is passed in
 # an Authorization header.
-import sys, os, base64, datetime, hashlib, hmac
+import sys
+import os
+import datetime
+import hashlib
+import hmac
 import requests  # pip install requests
 
 # ************* REQUEST VALUES *************

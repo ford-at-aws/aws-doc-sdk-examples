@@ -29,7 +29,6 @@
 import os
 import greengrasssdk
 from threading import Timer
-import time
 import awscam
 import cv2
 from threading import Thread
@@ -60,7 +59,7 @@ class FIFO_Thread(Thread):
         while Write_To_FIFO:
             try:
                 f.write(jpeg.tobytes())
-            except IOError as e:
+            except IOError:
                 continue
 
 

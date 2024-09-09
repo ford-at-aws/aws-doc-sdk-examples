@@ -5,7 +5,6 @@
 Unit tests for sns_fifo_topic.py
 """
 
-import json
 import boto3
 from botocore.exceptions import ClientError
 from botocore.stub import ANY

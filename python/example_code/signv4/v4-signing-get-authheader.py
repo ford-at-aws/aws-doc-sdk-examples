@@ -20,7 +20,11 @@ maintained as functional code.
 # See: http://docs.aws.amazon.com/general/latest/gr/sigv4_signing.html
 # This version makes a GET request and passes the signature
 # in the Authorization header.
-import sys, os, base64, datetime, hashlib, hmac
+import sys
+import os
+import datetime
+import hashlib
+import hmac
 import requests  # pip install requests
 
 # ************* REQUEST VALUES *************

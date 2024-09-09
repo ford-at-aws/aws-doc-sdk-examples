@@ -7,7 +7,6 @@ Tests for update_and_query.py.
 
 from decimal import Decimal
 import json
-from unittest.mock import patch
 import boto3
 from boto3.dynamodb.conditions import Key
 from botocore.exceptions import ClientError

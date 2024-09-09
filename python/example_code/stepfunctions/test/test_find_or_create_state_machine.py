@@ -1,7 +1,6 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 
-import json
 from unittest.mock import patch, mock_open
 from botocore.exceptions import ClientError
 import pytest

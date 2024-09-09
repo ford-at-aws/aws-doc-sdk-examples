@@ -149,7 +149,7 @@ class MedicalImagingWrapper:
                 )
                 body = obj["Body"]
                 break
-            except ClientError as error:
+            except ClientError:
                 retries = retries - 1
                 time.sleep(3)
         try:

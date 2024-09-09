@@ -10,7 +10,6 @@ Unit tests for ses_replicate_identities.py.
 import json
 import random
 import string
-import time
 import uuid
 import boto3
 from botocore.exceptions import ClientError

@@ -492,7 +492,7 @@ class Storage:
                     },
                 ],
             )
-        except Exception as err:
+        except Exception:
             logger.exception(
                 f"Couldn't call query() to construct the query for the Lending table."
             )
@@ -575,7 +575,7 @@ class Storage:
             ],
         )
         try:
-            results = self._run_statement(sql, sql_params)
+            self._run_statement(sql, sql_params)
         except Exception as err:
             logger.exception(
                 f"Error running SQL statement for return_book(): {str(err)}"

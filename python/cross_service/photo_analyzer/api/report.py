@@ -109,7 +109,6 @@ class Report(Resource):
         )
         text_labels = "\n".join(args["analysis_labels"])
         try:
-            pass
             self.ses_client.send_email(
                 Source=args["sender"],
                 Destination={"ToAddresses": [args["recipient"]]},

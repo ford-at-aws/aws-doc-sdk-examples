@@ -105,7 +105,7 @@ def create_db_cluster(cluster_name, db_name, admin_name, admin_password, rds_cli
             Engine="aurora-postgresql",
             DBInstanceClass="db.serverless",
         )
-        instance = create_instance_response["DBInstance"]
+        create_instance_response["DBInstance"]
     except ClientError:
         logger.exception("Couldn't create instance %s." % db_name)
         raise

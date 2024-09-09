@@ -5,7 +5,6 @@
 Contains common test fixtures used to run unit tests.
 """
 
-import random
 import sys
 
 # This is needed so Python can find test_tools on the path.

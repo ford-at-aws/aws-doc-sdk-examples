@@ -9,18 +9,12 @@ Shows how to use the AWS SDK for Python (Boto3) to manage and invoke AWS HealthI
 functions.
 """
 
-import datetime
-import gzip
-import json
 import logging
-import random
-import time
 import sys
 import os
 
 import boto3
 from botocore.exceptions import ClientError
-from threading import Thread
 
 # Import the wrapper for the service functionality.
 from medicalimaging import MedicalImagingWrapper
