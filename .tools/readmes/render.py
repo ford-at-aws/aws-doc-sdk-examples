@@ -219,7 +219,7 @@ class Renderer:
         customs = {}
         section = None
         subsection = None
-        with open(readme_filename, "r", encoding="utf-8") as readme:
+        with open(readme_filename, encoding="utf-8") as readme:
             for line in readme.readlines():
                 if line.lstrip().startswith("<!--custom") and line.rstrip().endswith(
                     "start-->"
