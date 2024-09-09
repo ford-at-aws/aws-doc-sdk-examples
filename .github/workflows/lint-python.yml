@@ -28,24 +28,39 @@ jobs:
         run: |
           pip install autopep8 pyupgrade black isort flynt
 
-      - name: Run autopep8, pyupgrade, black, isort, and flynt
+      # Step 1: Run autopep8 for formatting
+      - name: Run autopep8 on changed files
         if: steps.changed-files.outputs.any_changed == 'true'
         run: |
           changed_files=(${{steps.changed-files.outputs.all_changed_files}})
-          
-          # Run autopep8 with single aggressive mode on changed files
           autopep8 --in-place --aggressive "${changed_files[@]}"
-          
-          # Run pyupgrade to ensure Python 3.6+ compatibility only on changed files
+
+      # Step 2: Run pyupgrade to ensure Python 3.6+ compatibility
+      - name: Run pyupgrade on changed files
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          changed_files=(${{steps.changed-files.outputs.all_changed_files}})
           for file in "${changed_files[@]}"; do
             pyupgrade --py36-plus "$file"
           done
-          
-          # Run black for consistent formatting on changed files
+
+      # Step 3: Run black for consistent formatting
+      - name: Run black on changed files
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          changed_files=(${{steps.changed-files.outputs.all_changed_files}})
           black "${changed_files[@]}"
-          
-          # Sort imports using isort on changed files
+
+      # Step 4: Run isort to sort imports
+      - name: Run isort on changed files
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          changed_files=(${{steps.changed-files.outputs.all_changed_files}})
           isort "${changed_files[@]}"
-          
-          # Use flynt to convert string formatting to f-strings on changed files
+
+      # Step 5: Run flynt to convert string formatting to f-strings
+      - name: Run flynt on changed files
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          changed_files=(${{steps.changed-files.outputs.all_changed_files}})
           flynt "${changed_files[@]}"
