@@ -1,23 +1,22 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 
-from collections import defaultdict
 import datetime
 import logging
 import os
 import re
+from collections import defaultdict
 from dataclasses import asdict
 from enum import Enum
-from jinja2 import Environment, FileSystemLoader, select_autoescape
 from operator import itemgetter
 from pathlib import Path
 from typing import Dict, List, Tuple
 
+import config
 from aws_doc_sdk_examples_tools.metadata import Example
 from aws_doc_sdk_examples_tools.sdks import Sdk
 from aws_doc_sdk_examples_tools.services import Service
-
-import config
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 from scanner import Scanner
 
 logger = logging.getLogger(__name__)
@@ -220,7 +219,7 @@ class Renderer:
         customs = {}
         section = None
         subsection = None
-        with open(readme_filename, "r", encoding="utf-8") as readme:
+        with open(readme_filename, encoding="utf-8") as readme:
             for line in readme.readlines():
                 if line.lstrip().startswith("<!--custom") and line.rstrip().endswith(
                     "start-->"
@@ -275,7 +274,12 @@ class Renderer:
         custom_cats = self._transform_custom_categories()
 
         if (
-            len(hello) + len(actions) + len(basics) + len(scenarios) + len(custom_cats) + len(crosses)
+            len(hello)
+            + len(actions)
+            + len(basics)
+            + len(scenarios)
+            + len(custom_cats)
+            + len(crosses)
             == 0
         ):
             return RenderStatus.NO_EXAMPLES

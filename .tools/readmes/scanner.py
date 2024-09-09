@@ -1,13 +1,13 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 
-import config
 import logging
 from collections import defaultdict
 from os.path import relpath
 from pathlib import Path
 from typing import Dict, List
 
+import config
 from aws_doc_sdk_examples_tools.doc_gen import DocGen
 from aws_doc_sdk_examples_tools.metadata import Example
 from aws_doc_sdk_examples_tools.sdks import Sdk
@@ -138,7 +138,8 @@ class Scanner:
                             base_folder = f"{config.language[self.lang_name][self.sdk_ver]['base_folder']}/"
                             if base_folder in github:
                                 tag_path = (
-                                    self._lang_level_double_dots() + github.split(base_folder, 1)[1]
+                                    self._lang_level_double_dots()
+                                    + github.split(base_folder, 1)[1]
                                 )
                             else:
                                 tag_path = github

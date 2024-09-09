@@ -5,8 +5,8 @@ on:  # yamllint disable-line rule:truthy
   workflow_dispatch:
 
 jobs:
-  black:
-    name: Flake8 Linting & Black Formatting
+  linting:
+    name: Linting & Formatting with autopep8, pyupgrade, black, isort, and flynt
     runs-on: ubuntu-latest
 
     steps:
@@ -26,11 +26,41 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install black pylint
+          pip install autopep8 pyupgrade black isort flynt
 
-      - name: Run Black & Pylint
+      # Step 1: Run autopep8 for formatting
+      - name: Run autopep8 on changed files
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          changed_files=(${{steps.changed-files.outputs.all_changed_files}})
+          autopep8 --in-place --aggressive "${changed_files[@]}"
+
+      # Step 2: Run pyupgrade to ensure Python 3.6+ compatibility
+      - name: Run pyupgrade on changed files
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          changed_files=(${{steps.changed-files.outputs.all_changed_files}})
+          for file in "${changed_files[@]}"; do
+            pyupgrade --py36-plus "$file"
+          done
+
+      # Step 3: Run black for consistent formatting
+      - name: Run black on changed files
         if: steps.changed-files.outputs.any_changed == 'true'
         run: |
           changed_files=(${{steps.changed-files.outputs.all_changed_files}})
           black "${changed_files[@]}"
-          pylint --rcfile .github/linters/.python-lint "${changed_files[@]}"
+
+      # Step 4: Run isort to sort imports
+      - name: Run isort on changed files
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          changed_files=(${{steps.changed-files.outputs.all_changed_files}})
+          isort "${changed_files[@]}"
+
+      # Step 5: Run flynt to convert string formatting to f-strings
+      - name: Run flynt on changed files
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          changed_files=(${{steps.changed-files.outputs.all_changed_files}})
+          flynt "${changed_files[@]}"
