@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Optional
 
 import config
+
 # flake8: noqa: F401 for side effects
 import update
 from render import MissingMetadataError, Renderer, RenderStatus
